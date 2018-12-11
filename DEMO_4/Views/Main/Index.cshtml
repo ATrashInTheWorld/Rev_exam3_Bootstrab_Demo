@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DEMO_4.Models.Person>
+
+@{ Html.RenderPartial("_PersonSearch"); }
+
+<div id="people-data">
+    @Html.DisplayForModel(Model)
+</div>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#search-form").submit(function (e) {
+                e.preventDefault();
+                var searchTerm = $("#search-text").val();
+                $.get("_PersonResult", { searchText: searchTerm }, function (data) {
+                    $("#people-data").html(data);
+                });
+            });
+
+        });
+    </script>
+}
